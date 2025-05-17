@@ -31,15 +31,16 @@ function showScores() {
 
   table.innerHTML +="" 
   let localStorage = JSON.parse(window.localStorage.getItem("scores") ?? '[]');
-  window.localStorage.setItem("scores", JSON.stringify([...localStorage, [nameInput.value.trim(), scoreInput.value.trim()]]));
-  scoresArray.push([nameInput.value.trim(),scoreInput.value.trim()]);
-  scoresArray.sort((a,b)=>b[1]-a[1]);
+  window.localStorage.setItem("scores", JSON.stringify([...localStorage, {name:nameInput.value.trim(), score:scoreInput.value.trim()}]));
+  scoresArray.push({name:nameInput.value.trim(), score:scoreInput.value.trim()});
+  scoresArray.sort((a,b)=>b.score-a.score);
   data +="<tr><th>Name</th><th>Score</th></tr>";
+  console.log(scoresArray)
   scoresArray.forEach((el)=>{
    data +=`
   <tr>
-  <td>${el[0]}</td>
-  <td>${el[1]}</td>
+  <td>${el.name}</td>
+  <td>${el.score}</td>
   </tr>
   `
   })
@@ -52,15 +53,16 @@ document.addEventListener("DOMContentLoaded", function () {
   console.log('scores===', scores)
   if (!scores) {
     //table.style.display = "none";
+    document.getElementById("scores").textContent ="No scores yet"
   } else {
     scores = JSON.parse(scores);
-    scores.sort((a,b)=>b[1]-a[1]);
+    scores.sort((a,b)=>b.score-a.score);
     scoresArray = scores;
     let data = "<tr><th>Name</th><th>Score</th></tr>"
     scores.forEach((el) => {
       data += `<tr>
-  <td>${el[0]}</td>
-  <td>${el[1]}</td></tr>`
+  <td>${el.name}</td>
+  <td>${el.score}</td></tr>`
     })
     table.innerHTML += data
   }
