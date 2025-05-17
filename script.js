@@ -2,7 +2,7 @@
 const nameInput = document.getElementById("name");
 const scoreInput = document.getElementById("score");
 const scores = document.getElementById("scores");
-var table = document.getElementsByTagName("table")[0];
+var table = document.getElementsByTagName("table")[0] ;
 var tbody = document.querySelector(".tbody");
 var scoresArray = []
 // Save score to Local Storage
@@ -28,7 +28,11 @@ function showScores() {
   // <td>${scoreInput.value.trim()}</td>
   // </tr>
   // `
-
+  console.log("table",table);
+  if(!window.localStorage.getItem("scores")){
+    table = document.createElement("table");
+    scores.appendChild(table)
+  }
   table.innerHTML +="" 
   let localStorage = JSON.parse(window.localStorage.getItem("scores") ?? '[]');
   window.localStorage.setItem("scores", JSON.stringify([...localStorage, {name:nameInput.value.trim(), score:scoreInput.value.trim()}]));
