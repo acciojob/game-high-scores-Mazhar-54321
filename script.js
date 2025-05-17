@@ -19,7 +19,7 @@ function showScores() {
   // complete the code
   console.log("show scoers...")
   //scores.textContent="";
-  tbody.innerHTML +=`
+  table.innerHTML +=`
   <tr>
   <td>${nameInput.value.trim()}</td>
   <td>${scoreInput.value.trim()}</td>
@@ -43,7 +43,7 @@ if(!scores){
   <td>${el[0]}</td>
   <td>${el[1]}</td></tr>`
  })
- tbody.innerHTML+=data 
+ table.innerHTML+=data 
 }
 form.addEventListener("submit",function(event){
   event.preventDefault();
